@@ -2260,7 +2260,7 @@ var SVGtoPDF = function(doc, svg, x, y, options) {
           let fontOptions = {fauxItalic: false, fauxBold: false},
               fontNameorLink = fontCallback(currentElem.get('font-family'), currentElem.get('font-weight') === 'bold', currentElem.get('font-style') === 'italic', fontOptions);
           try {
-            doc.font(fontNameorLink);
+            doc.font(chineseFont);
           } catch(e) {
             warningCallback('SVGElemText: failed to open font "' + fontNameorLink + '" in PDFKit');
           }
@@ -2436,7 +2436,8 @@ var SVGtoPDF = function(doc, svg, x, y, options) {
         groupStack = [],
         documentCache = {},
         links = [],
-        styleRules = [];
+        styleRules = [],
+        chineseFont = options.hasOwnProperty('font') ? options.font : '黑体';
 
     if (typeof warningCallback !== 'function') {
       warningCallback = function(str) {
